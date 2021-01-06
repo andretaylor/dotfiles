@@ -1,0 +1,86 @@
+#!/usr/bin/env zsh
+
+# git
+alias prune='gco master && git pull && git remote prune origin'
+alias bleach='prune && git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d origin/'
+alias squash='gf && grbi origin/master --autosquash'
+alias prunetags='!git tag -l | xargs git tag -d && git fetch -t'
+
+alias gbl="git --no-pager branch -l"
+alias git-trigger-build="git commit --allow-empty -m 'Trigger Build'"
+alias gtb="git-trigger-build"
+alias unwrap-last-commit="git reset HEAD~1"
+
+alias set-git-email-personal='git config user.email "$PERSONAL_EMAIL"'
+alias set-git-email-work='git config user.email "$WORK_EMAIL"'
+
+# general
+alias hide-desktop="defaults write com.apple.finder CreateDesktop false; killall Finder"
+alias show-desktop="defaults write com.apple.finder CreateDesktop true; killall Finder"
+
+#alias wtf='wtfutil'
+alias ..="cd .."
+alias dropbox="cd ~/Dropbox"
+alias ea="vim ~/.zsh/aliases"
+alias eal="vim ~/.zsh/aliases.local"
+alias ef="vim ~/.zsh/funcs"
+alias em="mix ecto.migrate"
+alias ep="vim ~/.zsh/mah.zsh-theme"
+alias ev="vim ~/.vimrc"
+alias ez="vim ~/.zshrc"
+alias home="cd $HOME"
+
+alias sz="source ~/.zshrc"
+alias tree="tree | less"
+alias v="vim ."
+alias vi="vim ."
+alias vim="nvim"
+alias vr="vimr . --cur-env"
+alias lsf='ls | fzf-tmux -p -- --reverse'
+
+alias stable-nvim='asdf global neovim stable'
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
+alias nightly-nvim='asdf global neovim nightly'
+alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+alias master-nvim='asdf global neovim ref:master'
+alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
+
+alias clapped='sed "s/ / 👏 /g"'
+alias clap!='pbpaste | clapped | pbcopy'
+
+# docker
+alias dc='docker-compose'
+
+# scribd aliases
+alias kube='open -na "Google Chrome" --args --incognito https://jonny.devkube.scribd.com'
+alias fix='gc --fixup'
+alias scribd='cd /Users/jonny/Documents/scribd/git/scribd/'
+alias flat='node ~/shell/flatten.js'
+
+alias dinit='ASSETS_MODE=build_dev devkube init'
+alias dstop='devkube syncer stop-all'
+alias dstart='devkube syncer start-all'
+alias dbash='devkube exec frontend bash'
+alias dbashr='devkube exec rails bash'
+
+dswitch() {
+  export USER=$1
+  devkube cluster set default
+}
+
+monoSync() {
+  config=~/.devkube/devkube_config_custom.yaml
+  if [[ $1 == "disable" ]]; then
+    mv ${config}{,.disabled}
+  else
+    mv ${config}{.disabled,}
+  fi
+}
+
+# gh aliases
+
+alias ghc='gh repo clone'
+alias ghv='gh repo view -w'
+
+source $HOME/.zsh/aliases.local
+

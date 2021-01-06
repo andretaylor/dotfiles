@@ -1,0 +1,26 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.detectIndentation": true,
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.wordWrap": 0,
+    "files.associations": {
+        "*.graphql": "json"
+    },
+    "ruby.rubocop.executePath": "/Users/jonny/.asdf/shims/",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "python.formatting.provider": "yapf",
+    "python.pythonPath": "/usr/bin/python",
+    "terminal.external.osxExec": "Terminal.app",
+    "terminal.integrated.shellArgs.osx": [
+        "-l"
+    ],
+    "window.nativeTabs": true,
+    "window.zoomLevel": 2,
+    "jest.autoEnable": false
+}

@@ -1,0 +1,38 @@
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[user]
+	name = Jonny
+	email = jonny@scribd.com
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[push]
+	default = current
+[color]
+	ui = true
+	branch = auto
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = nvim
+[include]
+  path = ~/.gitconfig.local
+[alias]
+	next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+	prev = checkout HEAD^
+  empty = !git checkout . && git clean -fd
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[mergetool]
+	keepBackup = false
+[interactive]
+	diffFilter = delta --color-only
+[pull]
+	ff = only
+[init]
+	defaultBranch = main

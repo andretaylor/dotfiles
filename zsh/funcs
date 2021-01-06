@@ -1,0 +1,67 @@
+#!/usr/bin/env zsh
+
+path() {
+  echo $PATH | tr ':' '\n'
+}
+
+aliases() {
+  if [ -f ~/.zsh/aliases ]; then
+    cat ~/.zsh/aliases
+  fi
+
+  if [ -f ~/.zsh/aliases.local ]; then
+    cat ~/.zsh/aliases.local
+  fi
+}
+
+funcs() {
+  if [ -f ~/.zsh/funcs ]; then
+    cat ~/.zsh/funcs
+  fi
+
+  if [ -f ~/.zsh/funcs.local ]; then
+    cat ~/.zsh/funcs.local
+  fi
+}
+
+rr() {
+  case "$#" in
+    0) bin/rails routes;;
+    *) bin/rails routes | ag "$@";;
+  esac
+}
+
+brew-outdated() {
+  echo "==> Running brew update..."
+  brew update >/dev/null
+
+  echo "\n==> Outdated brews and casks"
+  brew outdated
+}
+
+brew-upgrade() {
+  echo "\n==> brew upgrade"
+  brew upgrade
+
+  echo "\n==> brew cask upgrade"
+  brew upgrade --cask
+}
+
+alias bo="brew-outdated"
+alias bu="brew-upgrade"
+
+# scribd
+
+dswitch() {
+  export USER=$1
+  devkube cluster set default
+}
+
+monoSync() {
+  config=~/.devkube/devkube_config_custom.yaml
+  if [[ $1 == "disable" ]]; then
+    mv ${config}{,.disabled}
+  else
+    mv ${config}{.disabled,}
+  fi
+}
